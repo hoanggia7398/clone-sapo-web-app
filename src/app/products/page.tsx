@@ -107,15 +107,15 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container mx-auto p-6 space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold">Products</h1>
+        <h1 className="text-2xl font-bold">Sản phẩm</h1>
         <Button
           className="flex items-center gap-1"
           onClick={handleCreateProduct}
         >
           <Plus className="w-4 h-4" />
-          Add Product
+          Thêm sản phẩm
         </Button>
       </div>
 
@@ -124,7 +124,7 @@ export default function ProductsPage() {
         <div className="relative w-full sm:w-80">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search products..."
+            placeholder="Tìm kiếm sản phẩm..."
             className="pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -145,8 +145,8 @@ export default function ProductsPage() {
         <div className="bg-white rounded-lg shadow p-8 text-center">
           <p className="text-muted-foreground">
             {searchTerm
-              ? "No products match your search criteria."
-              : "No products found. Add some products to get started."}
+              ? "Không tìm thấy sản phẩm phù hợp với từ khóa tìm kiếm."
+              : "Chưa có sản phẩm nào. Hãy thêm sản phẩm để bắt đầu."}
           </p>
         </div>
       )}

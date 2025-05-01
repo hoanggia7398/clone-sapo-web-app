@@ -40,15 +40,15 @@ export const ProductDetail = ({
   if (!product) return null;
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("vi-VN", {
       style: "currency",
-      currency: "USD",
-    }).format(amount);
+      currency: "VND",
+    }).format(amount * 23000); // Chuyển đổi từ USD sang VND
   };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString("vi-VN", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -61,21 +61,21 @@ export const ProductDetail = ({
         return (
           <Badge className="bg-green-100 text-green-800 hover:bg-green-200">
             <CheckCircle2 className="w-3 h-3 mr-1" />
-            Active
+            Đang bán
           </Badge>
         );
       case "inactive":
         return (
           <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-200">
             <XCircle className="w-3 h-3 mr-1" />
-            Inactive
+            Ngừng bán
           </Badge>
         );
       case "out_of_stock":
         return (
           <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-200">
             <AlertCircle className="w-3 h-3 mr-1" />
-            Out of Stock
+            Hết hàng
           </Badge>
         );
       default:
@@ -89,7 +89,7 @@ export const ProductDetail = ({
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
             <Package className="h-5 w-5" />
-            Product Details
+            Chi tiết sản phẩm
           </DialogTitle>
         </DialogHeader>
 
@@ -108,7 +108,7 @@ export const ProductDetail = ({
               <h2 className="text-xl font-semibold">{product.name}</h2>
               <div className="flex items-center gap-2">
                 <Tag className="h-4 w-4 text-gray-500" />
-                <span className="text-gray-600">SKU: {product.sku}</span>
+                <span className="text-gray-600">Mã SKU: {product.sku}</span>
               </div>
 
               <div className="flex justify-between">
@@ -134,29 +134,29 @@ export const ProductDetail = ({
           <div className="space-y-4">
             <div className="rounded-md bg-gray-50 p-4">
               <h3 className="text-sm font-medium text-gray-900 mb-2">
-                Product Information
+                Thông tin sản phẩm
               </h3>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Category</span>
+                  <span className="text-gray-500">Danh mục</span>
                   <span className="font-medium">{product.category}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Stock</span>
+                  <span className="text-gray-500">Tồn kho</span>
                   <span
                     className={`font-medium ${
                       product.stock === 0 ? "text-red-600" : ""
                     }`}
                   >
-                    {product.stock} units
+                    {product.stock} sản phẩm
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Created</span>
+                  <span className="text-gray-500">Ngày tạo</span>
                   <span>{formatDate(product.createdAt)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Last Updated</span>
+                  <span className="text-gray-500">Cập nhật lần cuối</span>
                   <span>{formatDate(product.updatedAt)}</span>
                 </div>
               </div>
@@ -166,7 +166,7 @@ export const ProductDetail = ({
               <div>
                 <h3 className="text-sm font-medium flex items-center gap-1 mb-1">
                   <Info className="h-4 w-4" />
-                  Description
+                  Mô tả
                 </h3>
                 <p className="text-gray-600 text-sm">{product.description}</p>
               </div>
@@ -176,7 +176,7 @@ export const ProductDetail = ({
               <div>
                 <h3 className="text-sm font-medium flex items-center gap-1 mb-2">
                   <Layers className="h-4 w-4" />
-                  Variations ({product.variations.length})
+                  Phiên bản ({product.variations.length})
                 </h3>
                 <div className="max-h-40 overflow-y-auto pr-2">
                   {product.variations.map((variation) => (
@@ -186,12 +186,12 @@ export const ProductDetail = ({
                     >
                       <p className="font-medium">{variation.name}</p>
                       <div className="flex justify-between mt-1">
-                        <span className="text-gray-500">Price:</span>
+                        <span className="text-gray-500">Giá:</span>
                         <span>{formatCurrency(variation.price)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-500">Stock:</span>
-                        <span>{variation.stock} units</span>
+                        <span className="text-gray-500">Tồn kho:</span>
+                        <span>{variation.stock} sản phẩm</span>
                       </div>
                     </div>
                   ))}
@@ -203,9 +203,9 @@ export const ProductDetail = ({
 
         <DialogFooter className="mt-6">
           <Button variant="outline" onClick={onClose}>
-            Close
+            Đóng
           </Button>
-          <Button onClick={() => onEdit(product)}>Edit Product</Button>
+          <Button onClick={() => onEdit(product)}>Chỉnh sửa</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

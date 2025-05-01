@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Search, Plus, MoreHorizontal, Edit, Trash2 } from "lucide-react";
-import Sidebar from "../../components/Common/Sidebar";
 import { customers as initialCustomers } from "../../mockData/customers";
 
 export default function Customers() {
@@ -71,9 +70,6 @@ export default function Customers() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Use the Sidebar component */}
-      <Sidebar />
-
       {/* Main Content */}
       <main className="flex-1 p-6 bg-gray-50 overflow-y-auto">
         <div className="pb-6 border-b">

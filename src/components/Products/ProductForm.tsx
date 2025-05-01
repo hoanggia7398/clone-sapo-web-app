@@ -42,22 +42,20 @@ interface ProductFormProps {
 
 // Define the form schema
 const productFormSchema = z.object({
-  name: z.string().min(1, { message: "Product name is required" }),
-  sku: z.string().min(1, { message: "SKU is required" }),
-  price: z.coerce
-    .number()
-    .min(0, { message: "Price must be a positive number" }),
+  name: z.string().min(1, { message: "Tên sản phẩm không được bỏ trống" }),
+  sku: z.string().min(1, { message: "Mã SKU không được bỏ trống" }),
+  price: z.coerce.number().min(0, { message: "Giá phải là số dương" }),
   originalPrice: z.coerce
     .number()
-    .min(0, { message: "Original price must be a positive number" })
+    .min(0, { message: "Giá gốc phải là số dương" })
     .optional(),
   stock: z.coerce
     .number()
-    .min(0, { message: "Stock must be a positive number" }),
-  category: z.string().min(1, { message: "Category is required" }),
+    .min(0, { message: "Số lượng tồn kho phải là số dương" }),
+  category: z.string().min(1, { message: "Danh mục không được bỏ trống" }),
   status: z.enum(["active", "inactive", "out_of_stock"]),
   description: z.string().optional(),
-  image: z.string().min(1, { message: "Image URL is required" }),
+  image: z.string().min(1, { message: "URL hình ảnh không được bỏ trống" }),
 });
 
 export type ProductFormValues = z.infer<typeof productFormSchema>;
@@ -135,7 +133,7 @@ export const ProductForm = ({
       <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {isEditing ? "Edit Product" : "Add New Product"}
+            {isEditing ? "Chỉnh sửa sản phẩm" : "Thêm sản phẩm mới"}
           </DialogTitle>
         </DialogHeader>
 
@@ -149,9 +147,9 @@ export const ProductForm = ({
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Product Name</FormLabel>
+                      <FormLabel>Tên sản phẩm</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter product name" {...field} />
+                        <Input placeholder="Nhập tên sản phẩm" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -163,64 +161,62 @@ export const ProductForm = ({
                   name="sku"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>SKU</FormLabel>
+                      <FormLabel>Mã SKU</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter product SKU" {...field} />
+                        <Input placeholder="Nhập mã SKU" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="price"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Price</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="number"
-                            step="0.01"
-                            min="0"
-                            placeholder="0.00"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Giá bán</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          placeholder="0"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="originalPrice"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Original Price (Optional)</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="number"
-                            step="0.01"
-                            min="0"
-                            placeholder="0.00"
-                            {...field}
-                            value={field.value || ""}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="originalPrice"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Giá gốc (Không bắt buộc)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          placeholder="0.00"
+                          {...field}
+                          value={field.value || ""}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <FormField
                   control={form.control}
                   name="stock"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Stock</FormLabel>
+                      <FormLabel>Tồn kho</FormLabel>
                       <FormControl>
                         <Input
                           type="number"
@@ -237,43 +233,41 @@ export const ProductForm = ({
 
               {/* Right Column */}
               <div className="space-y-4">
-                <div className="space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="image"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Image URL</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Enter image URL"
-                            {...field}
-                            onChange={(e) => handleImageChange(e)}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <div className="border rounded-md p-2 flex justify-center items-center h-40">
-                    {imagePreview ? (
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={imagePreview}
-                          alt="Product preview"
-                          fill
-                          className="object-contain"
-                          onError={() => setImagePreview("")}
+                <FormField
+                  control={form.control}
+                  name="image"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>URL hình ảnh</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Nhập URL hình ảnh"
+                          {...field}
+                          onChange={(e) => handleImageChange(e)}
                         />
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center text-gray-400">
-                        <ImagePlus className="h-10 w-10" />
-                        <span className="text-sm mt-2">Image Preview</span>
-                      </div>
-                    )}
-                  </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="border rounded-md p-2 flex justify-center items-center h-40 bg-gray-50">
+                  {imagePreview ? (
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={imagePreview}
+                        alt="Xem trước sản phẩm"
+                        fill
+                        className="object-contain"
+                        onError={() => setImagePreview("")}
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-gray-400">
+                      <ImagePlus className="h-10 w-10" />
+                      <span className="text-sm mt-2">Xem trước ảnh</span>
+                    </div>
+                  )}
                 </div>
 
                 <FormField
@@ -281,9 +275,9 @@ export const ProductForm = ({
                   name="category"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Category</FormLabel>
+                      <FormLabel>Danh mục</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter category" {...field} />
+                        <Input placeholder="Nhập danh mục" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -295,7 +289,7 @@ export const ProductForm = ({
                   name="status"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Status</FormLabel>
+                      <FormLabel>Trạng thái</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -303,15 +297,13 @@ export const ProductForm = ({
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select status" />
+                            <SelectValue placeholder="Chọn trạng thái" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="active">Active</SelectItem>
-                          <SelectItem value="inactive">Inactive</SelectItem>
-                          <SelectItem value="out_of_stock">
-                            Out of Stock
-                          </SelectItem>
+                          <SelectItem value="active">Đang bán</SelectItem>
+                          <SelectItem value="inactive">Ngừng bán</SelectItem>
+                          <SelectItem value="out_of_stock">Hết hàng</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -326,10 +318,10 @@ export const ProductForm = ({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Mô tả</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Enter product description"
+                      placeholder="Nhập mô tả sản phẩm"
                       className="resize-none min-h-[100px]"
                       {...field}
                     />
@@ -339,12 +331,12 @@ export const ProductForm = ({
               )}
             />
 
-            <DialogFooter>
+            <DialogFooter className="gap-2">
               <Button variant="outline" type="button" onClick={onClose}>
-                Cancel
+                Hủy
               </Button>
               <Button type="submit">
-                {isEditing ? "Update Product" : "Add Product"}
+                {isEditing ? "Cập nhật sản phẩm" : "Thêm sản phẩm"}
               </Button>
             </DialogFooter>
           </form>

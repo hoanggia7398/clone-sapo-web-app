@@ -32,20 +32,20 @@ export const DeleteProductDialog = ({
     <AlertDialog open={isOpen} onOpenChange={onClose}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Bạn có chắc chắn muốn xóa?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the
-            product <span className="font-semibold">{product.name}</span> and
-            remove its data from the server.
+            Hành động này không thể hoàn tác. Sản phẩm{" "}
+            <span className="font-semibold">{product.name}</span> sẽ bị xóa vĩnh
+            viễn và tất cả dữ liệu liên quan sẽ bị xóa khỏi hệ thống.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Hủy</AlertDialogCancel>
           <AlertDialogAction
             onClick={onDelete}
             className="bg-red-600 hover:bg-red-700"
           >
-            Delete
+            Xóa
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

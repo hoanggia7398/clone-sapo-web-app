@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Search, Plus, ChevronDown } from "lucide-react";
 import { orders } from "../../mockData/orders";
-import Sidebar from "../../components/Common/Sidebar";
 
 export default function Orders() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -11,9 +10,6 @@ export default function Orders() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Use the Sidebar component */}
-      <Sidebar />
-
       {/* Main Content */}
       <main className="flex-1 p-6 bg-white">
         <div className="pb-6 border-b">

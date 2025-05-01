@@ -50,21 +50,21 @@ export const ProductTable = ({
         return (
           <Badge className="bg-green-100 text-green-800 hover:bg-green-200">
             <CheckCircle2 className="w-3 h-3 mr-1" />
-            Active
+            Đang bán
           </Badge>
         );
       case "inactive":
         return (
           <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-200">
             <XCircle className="w-3 h-3 mr-1" />
-            Inactive
+            Ngừng bán
           </Badge>
         );
       case "out_of_stock":
         return (
           <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-200">
             <AlertCircle className="w-3 h-3 mr-1" />
-            Out of Stock
+            Hết hàng
           </Badge>
         );
       default:
@@ -73,10 +73,10 @@ export const ProductTable = ({
   };
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("vi-VN", {
       style: "currency",
-      currency: "USD",
-    }).format(amount);
+      currency: "VND",
+    }).format(amount * 23000); // Chuyển đổi từ USD sang VND (tạm tính tỉ giá 1 USD = 23000 VND)
   };
 
   return (
@@ -84,14 +84,14 @@ export const ProductTable = ({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[80px]">Image</TableHead>
-            <TableHead>Product Name</TableHead>
-            <TableHead>SKU</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Stock</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead className="w-[80px]">Ảnh</TableHead>
+            <TableHead>Tên sản phẩm</TableHead>
+            <TableHead>Mã SKU</TableHead>
+            <TableHead>Giá bán</TableHead>
+            <TableHead>Tồn kho</TableHead>
+            <TableHead>Danh mục</TableHead>
+            <TableHead>Trạng thái</TableHead>
+            <TableHead className="text-right">Thao tác</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -140,22 +140,22 @@ export const ProductTable = ({
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuLabel>Thao tác</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => onViewProduct(product)}>
                       <Eye className="mr-2 h-4 w-4" />
-                      <span>View</span>
+                      <span>Xem chi tiết</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => onEditProduct(product)}>
                       <Pencil className="mr-2 h-4 w-4" />
-                      <span>Edit</span>
+                      <span>Chỉnh sửa</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => onDeleteProduct(product)}
                       className="text-red-600 hover:text-red-700"
                     >
                       <Trash2 className="mr-2 h-4 w-4" />
-                      <span>Delete</span>
+                      <span>Xóa</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
