@@ -12,7 +12,6 @@ import {
   Tooltip,
   Legend,
   Filler,
-  ChartOptions,
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
 
@@ -82,8 +81,9 @@ export default function RevenueChart() {
       y: {
         beginAtZero: true,
         ticks: {
-          callback: function (value: any) {
-            return value + "M";
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          callback: function (this: any, tickValue: number | string) {
+            return tickValue + "M";
           },
         },
         grid: {
@@ -106,7 +106,7 @@ export default function RevenueChart() {
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: { parsed: { y: number } }) {
             const value = context.parsed.y;
             return `Doanh thu: ${formatCurrency(value * 1000000)}`;
           },

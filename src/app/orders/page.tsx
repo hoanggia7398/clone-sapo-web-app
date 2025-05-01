@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { FileText, Search, Plus, ChevronDown } from "lucide-react";
+import { Search, Plus, ChevronDown } from "lucide-react";
 import { orders } from "../../mockData/orders";
 import Sidebar from "../../components/Common/Sidebar";
 

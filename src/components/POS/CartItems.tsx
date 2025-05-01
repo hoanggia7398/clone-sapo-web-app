@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ShoppingBag, X, Plus, Minus, Package } from "lucide-react";
 import { RefObject } from "react";
 
@@ -57,9 +58,11 @@ export default function CartItems({
               <div className="w-12 h-12 md:w-16 md:h-16 rounded-md overflow-hidden mr-3 md:mr-4 flex-shrink-0 border border-gray-200">
                 <div className="w-full h-full bg-gray-50 flex items-center justify-center">
                   {item.image && item.image.startsWith("/") ? (
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.name}
+                      width={64}
+                      height={64}
                       className="w-full h-full object-cover"
                     />
                   ) : (

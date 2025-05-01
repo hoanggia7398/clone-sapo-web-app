@@ -28,14 +28,10 @@ import {
 } from "@/components/ui/sidebar";
 
 interface AppSidebarProps {
-  variant?: "default" | "pos";
   onItemClick?: () => void;
 }
 
-export default function AppSidebar({
-  variant = "default",
-  onItemClick,
-}: AppSidebarProps) {
+export default function AppSidebar({ onItemClick }: AppSidebarProps) {
   const pathname = usePathname();
 
   const isActivePath = (path: string) => {

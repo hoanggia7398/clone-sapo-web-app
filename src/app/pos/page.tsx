@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { products, initialCart, categories } from "../../mockData/pos";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { X, ShoppingBag } from "lucide-react";
 
 // Import các component đã tạo
 import POSHeader from "../../components/POS/POSHeader";
