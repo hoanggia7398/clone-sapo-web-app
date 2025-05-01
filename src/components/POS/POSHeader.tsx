@@ -4,14 +4,14 @@ import { Clock, User } from "lucide-react";
 
 export default function POSHeader() {
   return (
-    <div className="flex justify-between items-center mb-6">
+    <div className="flex justify-between items-center mb-3 md:mb-6">
       <div>
-        <h1 className="text-2xl font-semibold mb-1 text-gray-800">
+        <h1 className="text-xl md:text-2xl font-semibold mb-1 text-gray-800">
           POS Bán hàng
         </h1>
-        <div className="flex items-center text-gray-500 text-sm">
-          <Clock size={14} className="mr-1" />
-          <span>
+        <div className="flex items-center text-gray-500 text-xs md:text-sm">
+          <Clock size={14} className="mr-1 hidden sm:inline" />
+          <span className="line-clamp-1">
             {new Date().toLocaleDateString("vi-VN", {
               weekday: "long",
               year: "numeric",

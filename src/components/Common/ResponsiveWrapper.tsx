@@ -22,7 +22,7 @@ export default function ResponsiveWrapper({
       <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto flex flex-col">
+      <main className="flex-1 overflow-auto flex flex-col pt-10 md:pt-0">
         {/* Add a header spacing for mobile view */}
         <div className="h-14 md:h-0 relative"></div>
         <div className="flex-1">{children}</div>

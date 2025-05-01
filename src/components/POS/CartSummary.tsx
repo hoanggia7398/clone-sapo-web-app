@@ -23,11 +23,11 @@ export default function CartSummary({ calculateTotal }: CartSummaryProps) {
         <span className="text-blue-600 text-lg">{calculateTotal()}</span>
       </div>
 
-      <div className="mt-4 flex space-x-2">
-        <button className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        <button className="px-3 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors text-sm md:text-base">
           Huỷ
         </button>
-        <button className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors shadow-sm">
+        <button className="px-2 py-2.5 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors shadow-sm text-sm md:text-base">
           <span>Thanh toán</span>
           <ChevronRight size={16} className="ml-1" />
         </button>

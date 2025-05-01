@@ -61,7 +61,7 @@ export default function Sidebar({
         <div className="bg-blue-400 text-white w-8 h-8 rounded-md flex items-center justify-center text-xs font-bold mr-2">
           SC
         </div>
-        <span className="font-semibold text-lg">SapoClone</span>
+        <span className="pl-3 md:pl-0 font-semibold text-lg">SapoClone</span>
       </div>
 
       <div className="px-4 pb-2 text-xs text-gray-400">TỔNG QUAN</div>
