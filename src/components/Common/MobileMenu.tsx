@@ -1,5 +1,5 @@
 import { Menu, X } from "lucide-react";
-import Sidebar from "./Sidebar";
+import AppSidebar from "./AppSidebar";
 
 interface MobileMenuProps {
   menuOpen: boolean;
@@ -43,7 +43,7 @@ export default function MobileMenu({ menuOpen, setMenuOpen }: MobileMenuProps) {
           }`}
           onClick={(e) => e.stopPropagation()} // Prevent click from propagating to overlay
         >
-          <Sidebar onItemClick={handleMenuItemClick} />
+          <AppSidebar onItemClick={handleMenuItemClick} />
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "./Sidebar";
+import AppSidebar from "./AppSidebar";
 import MobileMenu from "./MobileMenu";
 
 export default function ResponsiveWrapper({
@@ -15,7 +15,7 @@ export default function ResponsiveWrapper({
     <div className="flex h-screen">
       {/* Desktop Sidebar - hidden on mobile */}
       <div className="hidden md:block">
-        <Sidebar />
+        <AppSidebar />
       </div>
 
       {/* Mobile Menu */}
