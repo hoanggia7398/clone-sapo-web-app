@@ -52,52 +52,63 @@ export default function CartItems({
           {cart.map((item) => (
             <div
               key={item.id}
-              className="flex items-start mb-4 pb-4 border-b group"
+              className="flex items-center mb-6 pb-2 border-b group relative"
             >
-              <div className="w-10 h-10 bg-blue-100 rounded-md flex items-center justify-center text-blue-600 mr-3 text-lg">
-                {item.image || "👕"}
-              </div>
-              <div className="flex-1">
-                <div className="flex justify-between">
-                  <p className="font-medium text-gray-800">{item.name}</p>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      removeFromCart(item.id);
-                    }}
-                    className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <X size={16} />
-                  </button>
+              <div className="w-16 h-16 rounded-md overflow-hidden mr-4 flex-shrink-0 border border-gray-200">
+                <div className="w-full h-full bg-gray-50 flex items-center justify-center">
+                  {item.image && item.image.startsWith("/") ? (
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-3xl">{item.image || "🛍️"}</span>
+                  )}
                 </div>
-                <p className="text-xs text-gray-500">SKU: {item.sku}</p>
-                <div className="flex items-center justify-between mt-2">
-                  <div className="flex items-center border rounded-lg overflow-hidden bg-gray-50">
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-medium text-lg text-gray-800 truncate mb-1">
+                  {item.name}
+                </h3>
+                <p className="text-xs text-gray-500 mb-2">SKU: {item.sku}</p>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
                     <button
-                      className="px-2 py-1 text-gray-500 hover:bg-gray-200 transition-colors"
+                      className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-300 transition-colors"
                       onClick={(e) => {
                         e.stopPropagation();
                         updateQuantity(item.id, item.quantity - 1);
                       }}
                     >
-                      <Minus size={14} />
+                      <Minus size={16} />
                     </button>
-                    <span className="px-3 font-medium text-sm">
+                    <span className="px-4 font-medium text-lg">
                       {item.quantity}
                     </span>
                     <button
-                      className="px-2 py-1 text-gray-500 hover:bg-gray-200 transition-colors"
+                      className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition-colors"
                       onClick={(e) => {
                         e.stopPropagation();
                         updateQuantity(item.id, item.quantity + 1);
                       }}
                     >
-                      <Plus size={14} />
+                      <Plus size={16} />
                     </button>
                   </div>
-                  <p className="text-blue-600 font-medium">{item.price}</p>
+                  <p className="text-xl font-semibold">{item.price}</p>
                 </div>
               </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeFromCart(item.id);
+                }}
+                className="absolute top-0 right-0 text-gray-400 hover:text-red-500"
+              >
+                <X size={18} />
+              </button>
             </div>
           ))}
         </div>
