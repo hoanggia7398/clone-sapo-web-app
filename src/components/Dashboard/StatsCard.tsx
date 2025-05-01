@@ -1,4 +1,11 @@
-import { ArrowUp, ArrowDown } from "lucide-react";
+import {
+  ArrowUp,
+  ArrowDown,
+  BarChart2,
+  DollarSign,
+  FileText,
+  Users,
+} from "lucide-react";
 
 interface StatsCardProps {
   title: string;
@@ -8,7 +15,7 @@ interface StatsCardProps {
     isPositive: boolean;
   };
   previousValue: string;
-  icon: React.ReactNode;
+  icon: string | React.ReactNode; // Updated to accept string or React.ReactNode
   iconBgColor: string;
   iconColor: string;
 }
@@ -26,6 +33,25 @@ export default function StatsCard({
   const formattedChangeValue = change.isPositive
     ? change.value
     : `-${change.value}`;
+
+  // Render the appropriate icon component based on the icon name
+  const renderIcon = () => {
+    if (typeof icon === "string") {
+      switch (icon) {
+        case "DollarSign":
+          return <DollarSign size={24} />;
+        case "FileText":
+          return <FileText size={24} />;
+        case "Users":
+          return <Users size={24} />;
+        case "BarChart2":
+          return <BarChart2 size={24} />;
+        default:
+          return null;
+      }
+    }
+    return icon;
+  };
 
   return (
     <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-50 transition-all duration-200 hover:shadow-md hover:border-gray-100 group">
@@ -50,7 +76,7 @@ export default function StatsCard({
         <div
           className={`${iconBgColor} h-12 w-12 flex items-center justify-center rounded-full ${iconColor} transition-transform group-hover:scale-110`}
         >
-          {icon}
+          {renderIcon()}
         </div>
       </div>
       <p className="text-gray-400 text-xs mt-4 border-t border-gray-50 pt-2">
