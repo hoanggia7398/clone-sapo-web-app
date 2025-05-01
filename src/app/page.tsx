@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Calendar, ChevronDown, DollarSign, Search, Users } from "lucide-react";
+import { Calendar, ChevronDown, Search } from "lucide-react";
 import StatsCard from "../components/Dashboard/StatsCard";
 import RevenueChart from "../components/Dashboard/RevenueChart";
 import BestSellingProducts from "../components/Dashboard/BestSellingProducts";
@@ -9,85 +9,11 @@ import RecentOrders from "../components/Dashboard/RecentOrders";
 import BranchPerformance from "../components/Dashboard/BranchPerformance";
 import PaymentMethods from "../components/Dashboard/PaymentMethods";
 import Footer from "../components/Dashboard/Footer";
+import { statsCards, dateOptions } from "../mockData/dashboard";
 
 export default function Home() {
   const [dateFilter, setDateFilter] = useState("today");
   const [showDateDropdown, setShowDateDropdown] = useState(false);
-
-  // Stats data
-  const statsCards = [
-    {
-      title: "Doanh thu",
-      value: "123,456,000đ",
-      change: { value: "12.5%", isPositive: true },
-      previousValue: "11,184,000đ",
-      icon: <DollarSign size={20} />,
-      iconBgColor: "bg-blue-50",
-      iconColor: "text-blue-500",
-    },
-    {
-      title: "Đơn hàng",
-      value: "164",
-      change: { value: "8.3%", isPositive: true },
-      previousValue: "152",
-      icon: (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
-          <polyline points="13 2 13 9 20 9" />
-        </svg>
-      ),
-      iconBgColor: "bg-orange-50",
-      iconColor: "text-orange-500",
-    },
-    {
-      title: "Khách hàng",
-      value: "38",
-      change: { value: "4.2%", isPositive: false },
-      previousValue: "42",
-      icon: <Users size={20} />,
-      iconBgColor: "bg-purple-50",
-      iconColor: "text-purple-500",
-    },
-    {
-      title: "Giá trị trung bình",
-      value: "76,610đ",
-      change: { value: "3.8%", isPositive: true },
-      previousValue: "73,576đ",
-      icon: (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path d="M12 20V10" />
-          <path d="M18 20V4" />
-          <path d="M6 20v-4" />
-        </svg>
-      ),
-      iconBgColor: "bg-green-50",
-      iconColor: "text-green-500",
-    },
-  ];
-
-  // Date range options
-  const dateOptions = [
-    { label: "Hôm nay", value: "today" },
-    { label: "Hôm qua", value: "yesterday" },
-    { label: "7 ngày qua", value: "7days" },
-    { label: "Tháng này", value: "thisMonth" },
-    { label: "Tháng trước", value: "lastMonth" },
-    { label: "Tùy chỉnh", value: "custom" },
-  ];
 
   // Get current date option label
   const getCurrentDateLabel = () => {

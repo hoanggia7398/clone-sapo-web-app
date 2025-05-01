@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { Search, Plus, MoreHorizontal, Edit, Trash2 } from "lucide-react";
 import Sidebar from "../../components/Common/Sidebar";
+import { customers as initialCustomers } from "../../mockData/customers";
 
 export default function Customers() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,42 +16,8 @@ export default function Customers() {
     address: "",
   });
 
-  // Hardcoded customers data
-  interface ICustomer {
-    id: number;
-    name: string;
-    phone: string;
-    email: string;
-    address: string;
-    createdAt: string;
-  }
-
-  const [customers, setCustomers] = useState<ICustomer[]>([
-    {
-      id: 1,
-      name: "Nguyễn Văn A",
-      phone: "0987654321",
-      email: "nguyenvana@example.com",
-      address: "123 Đường Lê Lợi, Quận 1, TP.HCM",
-      createdAt: "2025-04-15",
-    },
-    {
-      id: 2,
-      name: "Trần Thị B",
-      phone: "0912345678",
-      email: "tranthib@example.com",
-      address: "456 Đường Nguyễn Huệ, Quận 1, TP.HCM",
-      createdAt: "2025-04-10",
-    },
-    {
-      id: 3,
-      name: "Lê Văn C",
-      phone: "0909123456",
-      email: "levanc@example.com",
-      address: "789 Đường Cách Mạng Tháng 8, Quận 3, TP.HCM",
-      createdAt: "2025-04-05",
-    },
-  ]);
+  // Use customers data from mockData folder
+  const [customers, setCustomers] = useState(initialCustomers);
 
   // Filter customers based on search query
   const filteredCustomers = customers.filter((customer) => {

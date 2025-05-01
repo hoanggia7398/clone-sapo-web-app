@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import { products, initialCart, categories } from "../../mockData/pos";
 
 // Import các component đã tạo
 import POSHeader from "../../components/POS/POSHeader";
@@ -29,113 +30,11 @@ interface CartItem extends Product {
 export default function POS() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("Tất cả");
-  const [cart, setCart] = useState<CartItem[]>([
-    {
-      id: 1,
-      name: "Áo thun nam cổ tròn",
-      sku: "SP0012",
-      price: "90,000đ",
-      quantity: 1,
-      image: "👕",
-      category: "Quần áo",
-    },
-    {
-      id: 2,
-      name: "Áo khoác bomber",
-      sku: "SP0013",
-      price: "350,000đ",
-      quantity: 1,
-      image: "👕",
-      category: "Quần áo",
-    },
-    {
-      id: 3,
-      name: "Quần jean nam",
-      sku: "SP0014",
-      price: "450,000đ",
-      quantity: 1,
-      image: "👖",
-      category: "Quần áo",
-    },
-  ]);
+  const [cart, setCart] = useState<CartItem[]>(initialCart);
   const [paymentMethod, setPaymentMethod] = useState("cash");
 
   const cartRef = useRef<HTMLDivElement>(null);
   const productRefs = useRef<{ [key: number]: HTMLDivElement }>({});
-
-  // Hardcoded products data
-  const products = [
-    {
-      id: 1,
-      name: "Áo thun nam cổ tròn",
-      sku: "SP0012",
-      price: "90,000đ",
-      image: "👕",
-      category: "Quần áo",
-    },
-    {
-      id: 2,
-      name: "Áo khoác bomber",
-      sku: "SP0013",
-      price: "350,000đ",
-      image: "👕",
-      category: "Quần áo",
-    },
-    {
-      id: 3,
-      name: "Quần jean nam",
-      sku: "SP0014",
-      price: "450,000đ",
-      image: "👖",
-      category: "Quần áo",
-    },
-    {
-      id: 4,
-      name: "Ốp lưng iPhone 13",
-      sku: "SP0045",
-      price: "50,000đ",
-      image: "📱",
-      category: "Điện tử",
-    },
-    {
-      id: 5,
-      name: "Tai nghe Bluetooth",
-      sku: "SP0078",
-      price: "120,000đ",
-      image: "🎧",
-      category: "Điện tử",
-    },
-    {
-      id: 6,
-      name: "Cốc giữ nhiệt",
-      sku: "SP0124",
-      price: "70,000đ",
-      image: "☕",
-      category: "Nhà bếp",
-    },
-    {
-      id: 7,
-      name: "Sổ tay ghi chép",
-      sku: "SP0256",
-      price: "50,000đ",
-      image: "📓",
-      category: "Văn phòng phẩm",
-    },
-    {
-      id: 8,
-      name: "Chuột không dây",
-      sku: "SP0301",
-      price: "180,000đ",
-      image: "🖱️",
-      category: "Điện tử",
-    },
-  ];
-
-  // Get unique categories
-  const categories = [
-    "Tất cả",
-    ...Array.from(new Set(products.map((product) => product.category))),
-  ];
 
   // Filter products by category
   const filteredProducts =
