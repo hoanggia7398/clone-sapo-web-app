@@ -52,7 +52,7 @@ export default function CartItems({
           {cart.map((item) => (
             <div
               key={item.id}
-              className="flex items-center mb-4 md:mb-6 pb-2 border-b group relative"
+              className="flex items-center mb-4 md:mb-6 pb-2 border-b border-gray-300 group relative"
             >
               <div className="w-12 h-12 md:w-16 md:h-16 rounded-md overflow-hidden mr-3 md:mr-4 flex-shrink-0 border border-gray-200">
                 <div className="w-full h-full bg-gray-50 flex items-center justify-center">

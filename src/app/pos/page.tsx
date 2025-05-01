@@ -158,7 +158,7 @@ export default function POS() {
 
       {/* Cart Section */}
       <div
-        className={`w-full md:w-1/3 bg-white border-l flex flex-col h-full ${
+        className={`w-full md:w-1/3 bg-white border-l border-gray-300 flex flex-col h-full ${
           showCart ? "block" : "hidden"
         } md:block`}
       >
@@ -180,7 +180,7 @@ export default function POS() {
         />
 
         {/* Cart Summary */}
-        <div className="border-t p-4 bg-gray-50">
+        <div className="border-t border-gray-300 p-4 bg-gray-50">
           {/* Payment Method */}
           <PaymentMethod
             paymentMethod={paymentMethod}

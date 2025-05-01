@@ -31,7 +31,7 @@ export default function ProductGrid({
           ref={(el) => {
             if (el) productRefs.current[product.id] = el;
           }}
-          className="bg-white border rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition-all transform hover:-translate-y-1"
+          className="bg-white border border-gray-300 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition-all transform hover:-translate-y-1"
           onClick={() => addToCart(product)}
         >
           <div className="h-24 sm:h-36 bg-blue-50 flex items-center justify-center text-4xl">
