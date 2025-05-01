@@ -11,7 +11,6 @@ import CustomerSelection from "../components/POS/CustomerSelection";
 import CartItems from "../components/POS/CartItems";
 import PaymentMethod from "../components/POS/PaymentMethod";
 import CartSummary from "../components/POS/CartSummary";
-import FlyingProduct from "../components/POS/FlyingProduct";
 
 // Định nghĩa interface
 interface Product {
@@ -60,40 +59,9 @@ export default function POS() {
     },
   ]);
   const [paymentMethod, setPaymentMethod] = useState("cash");
-  const [flyingItem, setFlyingItem] = useState<{
-    id: number;
-    startX: number;
-    startY: number;
-    endX: number;
-    endY: number;
-    image: string;
-  } | null>(null);
 
   const cartRef = useRef<HTMLDivElement>(null);
   const productRefs = useRef<{ [key: number]: HTMLDivElement }>({});
-
-  // Store cart position
-  const [cartPosition, setCartPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    // Calculate cart position when component mounts and on window resize
-    const updateCartPosition = () => {
-      if (cartRef.current) {
-        const rect = cartRef.current.getBoundingClientRect();
-        setCartPosition({
-          x: rect.left + rect.width / 2,
-          y: rect.top + 100, // Target a point inside the cart area
-        });
-      }
-    };
-
-    updateCartPosition();
-    window.addEventListener("resize", updateCartPosition);
-
-    return () => {
-      window.removeEventListener("resize", updateCartPosition);
-    };
-  }, []);
 
   // Hardcoded products data
   const products = [
@@ -175,42 +143,21 @@ export default function POS() {
       ? products
       : products.filter((product) => product.category === activeCategory);
 
-  // Add product to cart with flying animation
-  const addToCart = (product: Product, event: React.MouseEvent) => {
-    const targetElement = productRefs.current[product.id];
+  // Add product to cart - simplified without flying animation
+  const addToCart = (product: Product) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
 
-    if (!targetElement || !cartRef.current) return;
-
-    const rect = targetElement.getBoundingClientRect();
-    const startX = rect.left + rect.width / 2;
-    const startY = rect.top + rect.height / 2;
-
-    setFlyingItem({
-      id: product.id,
-      startX,
-      startY,
-      endX: cartPosition.x,
-      endY: cartPosition.y,
-      image: product.image,
-    });
-
-    setTimeout(() => {
-      const existingProduct = cart.find((item) => item.id === product.id);
-
-      if (existingProduct) {
-        setCart(
-          cart.map((item) =>
-            item.id === product.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          )
-        );
-      } else {
-        setCart([...cart, { ...product, quantity: 1 }]);
-      }
-
-      setFlyingItem(null);
-    }, 850); // Slightly longer than animation duration
+    if (existingProduct) {
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
   };
 
   // Update product quantity in cart
@@ -285,9 +232,6 @@ export default function POS() {
           <CartSummary calculateTotal={calculateTotal} />
         </div>
       </div>
-
-      {/* Flying product animation */}
-      <FlyingProduct flyingItem={flyingItem} />
     </div>
   );
 }

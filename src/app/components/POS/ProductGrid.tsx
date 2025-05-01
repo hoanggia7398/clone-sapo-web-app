@@ -13,7 +13,7 @@ interface Product {
 
 interface ProductGridProps {
   products: Product[];
-  addToCart: (product: Product, event: React.MouseEvent) => void;
+  addToCart: (product: Product) => void;
   productRefs: MutableRefObject<{ [key: number]: HTMLDivElement }>;
 }
 
@@ -31,7 +31,7 @@ export default function ProductGrid({
             if (el) productRefs.current[product.id] = el;
           }}
           className="bg-white border rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition-all transform hover:-translate-y-1"
-          onClick={(e) => addToCart(product, e)}
+          onClick={() => addToCart(product)}
         >
           <div className="h-36 bg-blue-50 flex items-center justify-center text-4xl">
             {product.image}
@@ -47,7 +47,7 @@ export default function ProductGrid({
                 className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition-colors"
                 onClick={(e) => {
                   e.stopPropagation();
-                  addToCart(product, e);
+                  addToCart(product);
                 }}
               >
                 Thêm +
