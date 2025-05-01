@@ -1,16 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import {
-  Calendar,
-  ChevronDown,
-  DollarSign,
-  Filter,
-  Package,
-  Search,
-  Users,
-} from "lucide-react";
+import { Calendar, ChevronDown, DollarSign, Search, Users } from "lucide-react";
 import StatsCard from "./components/dashboard/StatsCard";
 import RevenueChart from "./components/dashboard/RevenueChart";
 import BestSellingProducts from "./components/dashboard/BestSellingProducts";
@@ -18,10 +9,8 @@ import RecentOrders from "./components/dashboard/RecentOrders";
 import BranchPerformance from "./components/dashboard/BranchPerformance";
 import PaymentMethods from "./components/dashboard/PaymentMethods";
 import Footer from "./components/dashboard/Footer";
-import MobileMenu from "./components/Common/MobileMenu";
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [dateFilter, setDateFilter] = useState("today");
   const [showDateDropdown, setShowDateDropdown] = useState(false);
 
@@ -109,7 +98,7 @@ export default function Home() {
   return (
     <>
       {/* Mobile Menu */}
-      <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      {/* <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> */}
 
       <div className="p-4 md:p-6 bg-slate-50 overflow-y-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4">
