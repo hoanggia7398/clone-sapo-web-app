@@ -41,7 +41,7 @@ const products = [
 
 export default function BestSellingProducts() {
   return (
-    <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-50 h-full">
+    <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-50 h-auto">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
           <TrendingUp size={18} className="text-blue-500 mr-2" />
