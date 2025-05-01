@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Search, Plus, MoreHorizontal, Edit, Trash2 } from "lucide-react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Common/Sidebar";
 
 export default function Customers() {
   const [searchQuery, setSearchQuery] = useState("");

@@ -11,14 +11,14 @@ import {
   Search,
   Users,
 } from "lucide-react";
-import MobileMenu from "./components/MobileMenu";
-import StatsCard from "./components/StatsCard";
-import RevenueChart from "./components/RevenueChart";
-import BestSellingProducts from "./components/BestSellingProducts";
-import RecentOrders from "./components/RecentOrders";
-import BranchPerformance from "./components/BranchPerformance";
-import PaymentMethods from "./components/PaymentMethods";
-import Footer from "./components/Footer";
+import StatsCard from "./components/dashboard/StatsCard";
+import RevenueChart from "./components/dashboard/RevenueChart";
+import BestSellingProducts from "./components/dashboard/BestSellingProducts";
+import RecentOrders from "./components/dashboard/RecentOrders";
+import BranchPerformance from "./components/dashboard/BranchPerformance";
+import PaymentMethods from "./components/dashboard/PaymentMethods";
+import Footer from "./components/dashboard/Footer";
+import MobileMenu from "./components/Common/MobileMenu";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
