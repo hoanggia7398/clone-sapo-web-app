@@ -11,7 +11,6 @@ import {
   Search,
   Users,
 } from "lucide-react";
-import Sidebar from "./components/Sidebar";
 import MobileMenu from "./components/MobileMenu";
 import StatsCard from "./components/StatsCard";
 import RevenueChart from "./components/RevenueChart";
@@ -108,17 +107,11 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <>
       {/* Mobile Menu */}
       <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
-      {/* Desktop Sidebar */}
-      <div className="hidden md:block">
-        <Sidebar />
-      </div>
-
-      {/* Main Content */}
-      <main className="flex-1 p-4 md:p-6 bg-slate-50 overflow-y-auto mt-14 md:mt-0">
+      <div className="p-4 md:p-6 bg-slate-50 overflow-y-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4">
           <div>
             <h1 className="text-xl md:text-2xl font-semibold">
@@ -229,7 +222,7 @@ export default function Home() {
 
         {/* Footer */}
         <Footer />
-      </main>
-    </div>
+      </div>
+    </>
   );
 }
