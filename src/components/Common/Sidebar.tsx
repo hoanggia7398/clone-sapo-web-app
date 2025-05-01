@@ -17,13 +17,38 @@ import {
 
 interface SidebarProps {
   variant?: "default" | "pos";
+  onItemClick?: () => void; // Thêm prop onItemClick
 }
 
-export default function Sidebar({ variant = "default" }: SidebarProps) {
+export default function Sidebar({
+  variant = "default",
+  onItemClick,
+}: SidebarProps) {
   const pathname = usePathname();
 
   const isActivePath = (path: string) => {
     return pathname === path;
+  };
+
+  // Wrapper cho các Link để xử lý onItemClick nếu được cung cấp
+  const NavLink = ({
+    href,
+    children,
+    className,
+  }: {
+    href: string;
+    children: React.ReactNode;
+    className: string;
+  }) => {
+    return (
+      <Link
+        href={href}
+        className={className}
+        onClick={() => onItemClick && onItemClick()}
+      >
+        {children}
+      </Link>
+    );
   };
 
   return (
@@ -40,7 +65,7 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
       </div>
 
       <div className="px-4 pb-2 text-xs text-gray-400">TỔNG QUAN</div>
-      <Link
+      <NavLink
         href="/"
         className={`flex items-center px-4 py-3 text-white ${
           isActivePath("/")
@@ -52,11 +77,11 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
           <Home size={20} />
         </div>
         <span>Dashboard</span>
-      </Link>
+      </NavLink>
 
       <div className="mt-4 px-4 pb-2 text-xs text-gray-400">BÁN HÀNG</div>
       <nav>
-        <Link
+        <NavLink
           href="/pos"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/pos")
@@ -71,8 +96,8 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <ShoppingBag size={20} />
           </div>
           <span>POS Bán hàng</span>
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           href="/orders"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/orders")
@@ -84,8 +109,8 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <FileText size={20} />
           </div>
           <span>Đơn hàng</span>
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           href="/customers"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/customers")
@@ -97,12 +122,12 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <Users size={20} />
           </div>
           <span>Khách hàng</span>
-        </Link>
+        </NavLink>
       </nav>
 
       <div className="mt-4 px-4 pb-2 text-xs text-gray-400">SẢN PHẨM</div>
       <nav>
-        <Link
+        <NavLink
           href="/products"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/products")
@@ -114,8 +139,8 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <Package size={20} />
           </div>
           <span>Sản phẩm</span>
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           href="/categories"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/categories")
@@ -127,12 +152,12 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <Layers size={20} />
           </div>
           <span>Danh mục</span>
-        </Link>
+        </NavLink>
       </nav>
 
       <div className="mt-4 px-4 pb-2 text-xs text-gray-400">BÁO CÁO</div>
       <nav>
-        <Link
+        <NavLink
           href="/revenue"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/revenue")
@@ -144,8 +169,8 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <DollarSign size={20} />
           </div>
           <span>Doanh thu</span>
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           href="/bestsellers"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/bestsellers")
@@ -157,12 +182,12 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <BarChart3 size={20} />
           </div>
           <span>Sản phẩm bán chạy</span>
-        </Link>
+        </NavLink>
       </nav>
 
       <div className="mt-4 px-4 pb-2 text-xs text-gray-400">HỆ THỐNG</div>
       <nav>
-        <Link
+        <NavLink
           href="/stores"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/stores")
@@ -174,8 +199,8 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <Store size={20} />
           </div>
           <span>Chi nhánh</span>
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           href="/staff"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/staff")
@@ -187,8 +212,8 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <Users size={20} />
           </div>
           <span>Nhân viên</span>
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           href="/settings"
           className={`flex items-center px-4 py-3 text-white ${
             isActivePath("/settings")
@@ -200,7 +225,7 @@ export default function Sidebar({ variant = "default" }: SidebarProps) {
             <Settings size={20} />
           </div>
           <span>Cài đặt</span>
-        </Link>
+        </NavLink>
       </nav>
     </aside>
   );

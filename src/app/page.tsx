@@ -28,7 +28,8 @@ export default function Home() {
 
       <div className="p-4 md:p-6 bg-slate-50 overflow-y-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4">
-          <div>
+          <div className="pl-12 md:pl-0">
+            {/* Added padding-left for mobile view */}
             <h1 className="text-xl md:text-2xl font-semibold">
               Thông tin tổng quan hệ thống
             </h1>
