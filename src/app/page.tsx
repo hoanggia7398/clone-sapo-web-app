@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { Calendar, ChevronDown, DollarSign, Search, Users } from "lucide-react";
-import StatsCard from "./components/Dashboard/StatsCard";
-import RevenueChart from "./components/Dashboard/RevenueChart";
-import BestSellingProducts from "./components/Dashboard/BestSellingProducts";
-import RecentOrders from "./components/Dashboard/RecentOrders";
-import BranchPerformance from "./components/Dashboard/BranchPerformance";
-import PaymentMethods from "./components/Dashboard/PaymentMethods";
-import Footer from "./components/Dashboard/Footer";
+import StatsCard from "../components/Dashboard/StatsCard";
+import RevenueChart from "../components/Dashboard/RevenueChart";
+import BestSellingProducts from "../components/Dashboard/BestSellingProducts";
+import RecentOrders from "../components/Dashboard/RecentOrders";
+import BranchPerformance from "../components/Dashboard/BranchPerformance";
+import PaymentMethods from "../components/Dashboard/PaymentMethods";
+import Footer from "../components/Dashboard/Footer";
 
 export default function Home() {
   const [dateFilter, setDateFilter] = useState("today");

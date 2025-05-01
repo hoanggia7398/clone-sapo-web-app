@@ -3,14 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 
 // Import các component đã tạo
-import POSHeader from "../components/POS/POSHeader";
-import ProductSearch from "../components/POS/ProductSearch";
-import CategoryFilter from "../components/POS/CategoryFilter";
-import ProductGrid from "../components/POS/ProductGrid";
-import CustomerSelection from "../components/POS/CustomerSelection";
-import CartItems from "../components/POS/CartItems";
-import PaymentMethod from "../components/POS/PaymentMethod";
-import CartSummary from "../components/POS/CartSummary";
+import POSHeader from "../../components/POS/POSHeader";
+import ProductSearch from "../../components/POS/ProductSearch";
+import CategoryFilter from "../../components/POS/CategoryFilter";
+import ProductGrid from "../../components/POS/ProductGrid";
+import CustomerSelection from "../../components/POS/CustomerSelection";
+import CartItems from "../../components/POS/CartItems";
+import PaymentMethod from "../../components/POS/PaymentMethod";
+import CartSummary from "../../components/POS/CartSummary";
 
 // Định nghĩa interface
 interface Product {

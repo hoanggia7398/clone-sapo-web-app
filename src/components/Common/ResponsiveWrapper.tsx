@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "../Common/Sidebar";
+import Sidebar from "./Sidebar";
 import MobileMenu from "./MobileMenu";
 
 export default function ResponsiveWrapper({
