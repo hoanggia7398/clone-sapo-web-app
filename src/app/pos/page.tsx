@@ -172,9 +172,6 @@ export default function POS() {
     setShowSearchResults(query.length > 0);
   };
 
-  // Count total items in cart
-  const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-
   return (
     <div className="flex-1 flex flex-col overflow-hidden relative h-[calc(100vh-3.5rem)] md:h-full">
       {/* Products and Cart Layout */}

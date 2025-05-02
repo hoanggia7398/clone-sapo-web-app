@@ -18,7 +18,6 @@ import {
   AlertCircle,
   Package,
   Tag,
-  Calendar,
   DollarSign,
   Layers,
   Info,
