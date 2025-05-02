@@ -63,13 +63,16 @@ export default function StoreForm({ initialData }: StoreFormProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: string, value: string | boolean) => {
     if (field.includes(".")) {
       const [parent, child] = field.split(".");
       setFormData({
         ...formData,
         [parent]: {
-          ...(formData[parent as keyof typeof formData] as any),
+          ...(formData[parent as keyof typeof formData] as Record<
+            string,
+            string
+          >),
           [child]: value,
         },
       });
