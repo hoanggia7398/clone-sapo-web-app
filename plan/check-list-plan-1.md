@@ -57,13 +57,13 @@
 - [x] Thêm chức năng xóa chi nhánh
 
 ### 1.6 Trang nhân viên (/staff)
-- [ ] Tạo file trang cơ bản (`src/app/staff/page.tsx`)
-- [ ] Thiết kế và triển khai UI danh sách nhân viên
-  - [ ] Tạo component hiển thị nhân viên (`src/components/Staff/StaffList.tsx`)
-  - [ ] Tạo mockData cho nhân viên (`src/mockData/staff.ts`)
-- [ ] Thêm chức năng quản lý thông tin nhân viên
-- [ ] Thêm chức năng phân quyền cho nhân viên
-- [ ] Thêm thống kê hoạt động của nhân viên
+- [x] Tạo file trang cơ bản (`src/app/staff/page.tsx`)
+- [x] Thiết kế và triển khai UI danh sách nhân viên
+  - [x] Tạo component hiển thị nhân viên (`src/components/Staff/StaffList.tsx`)
+  - [x] Tạo mockData cho nhân viên (`src/mockData/staff.ts`)
+- [x] Thêm chức năng quản lý thông tin nhân viên
+- [x] Thêm chức năng phân quyền cho nhân viên
+- [x] Thêm thống kê hoạt động của nhân viên
 
 ### 1.7 Trang cài đặt (/settings)
 - [ ] Tạo file trang cơ bản (`src/app/settings/page.tsx`)
@@ -110,5 +110,6 @@
 ## Ưu tiên hiện tại (theo kế hoạch)
 1. ✅ Hoàn thiện trang sản phẩm (/products)
 2. ✅ Hoàn thiện trang danh mục (/categories)
-3. Thêm pagination cho danh sách đơn hàng và khách hàng
-4. Tối ưu giao diện trên thiết bị di động
+3. ✅ Hoàn thiện trang nhân viên (/staff)
+4. Thêm pagination cho danh sách đơn hàng và khách hàng
+5. Tối ưu giao diện trên thiết bị di động
