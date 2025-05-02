@@ -19,14 +19,14 @@
 - [x] Thêm chức năng tìm kiếm sản phẩm
 
 ### 1.2 Trang danh mục (/categories)
-- [ ] Tạo file trang cơ bản (`src/app/categories/page.tsx`)
-- [ ] Thiết kế và triển khai UI danh mục
-  - [ ] Tạo component hiển thị cây danh mục (`src/components/Categories/CategoryTree.tsx`)
-  - [ ] Tạo mockData cho danh mục (`src/mockData/categories.ts`)
-- [ ] Thêm chức năng thêm danh mục
-- [ ] Thêm chức năng sửa danh mục
-- [ ] Thêm chức năng xóa danh mục
-- [ ] Tạo liên kết giữa sản phẩm và danh mục
+- [x] Tạo file trang cơ bản (`src/app/categories/page.tsx`)
+- [x] Thiết kế và triển khai UI danh mục
+  - [x] Tạo component hiển thị cây danh mục (`src/components/Categories/CategoryTree.tsx`)
+  - [x] Tạo mockData cho danh mục (`src/mockData/categories.ts`)
+- [x] Thêm chức năng thêm danh mục
+- [x] Thêm chức năng sửa danh mục
+- [x] Thêm chức năng xóa danh mục
+- [x] Tạo liên kết giữa sản phẩm và danh mục
 
 ### 1.3 Trang doanh thu (/revenue)
 - [ ] Tạo file trang cơ bản (`src/app/revenue/page.tsx`)
@@ -106,5 +106,6 @@
 
 ## Ưu tiên hiện tại (theo kế hoạch)
 1. ✅ Hoàn thiện trang sản phẩm (/products)
-2. Thêm pagination cho danh sách đơn hàng và khách hàng
-3. Tối ưu giao diện trên thiết bị di động
+2. ✅ Hoàn thiện trang danh mục (/categories)
+3. Thêm pagination cho danh sách đơn hàng và khách hàng
+4. Tối ưu giao diện trên thiết bị di động
