@@ -4,7 +4,7 @@ import { categoryChartData } from "@/mockData/bestsellers";
 import { chartColors } from "@/lib/chartUtils";
 import { Doughnut } from "react-chartjs-2";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-import { ChartOptions } from "chart.js";
+import { ChartOptions, TooltipItem } from "chart.js";
 
 const BestsellingCategoryChart = () => {
   // Colors for categories
@@ -46,7 +46,7 @@ const BestsellingCategoryChart = () => {
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"doughnut">) {
             const label = context.label || "";
             const value = context.parsed || 0;
             const total = context.dataset.data.reduce(

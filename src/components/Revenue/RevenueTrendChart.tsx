@@ -10,7 +10,12 @@ import {
 import { Bar, Line } from "react-chartjs-2";
 import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-import { ChartOptions } from "chart.js";
+import {
+  ChartOptions,
+  TooltipItem,
+  ScriptableScaleContext,
+  ScriptableContext,
+} from "chart.js";
 
 const RevenueTrendChart = () => {
   const [chartType, setChartType] = useState<"bar" | "line">("bar");
@@ -38,7 +43,7 @@ const RevenueTrendChart = () => {
         label: "Doanh thu",
         data: revenueByTime.data,
         borderColor: chartColors.primary,
-        backgroundColor: (context: any) => {
+        backgroundColor: (context: ScriptableContext<"line">) => {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
           if (!chartArea) {
@@ -63,7 +68,7 @@ const RevenueTrendChart = () => {
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"bar" | "line">) {
             let label = context.dataset.label || "";
             if (label) {
               label += ": ";
@@ -89,14 +94,18 @@ const RevenueTrendChart = () => {
       y: {
         beginAtZero: true,
         ticks: {
-          callback: function (value: any) {
-            return formatLargeNumber(value);
+          callback: function (value: string | number) {
+            // Ensure value is a number before formatting
+            const numericValue = typeof value === 'string' ? parseFloat(value) : value;
+            if (isNaN(numericValue)) {
+              return ''; // Or handle the non-numeric case appropriately
+            }
+            return formatLargeNumber(numericValue);
           },
         },
         grid: {
-          // Fix: replace drawBorder with display and color options that are properly typed
           display: true,
-          color: function (context) {
+          color: function (context: ScriptableScaleContext) {
             return context.tick && context.tick.major
               ? "rgba(0, 0, 0, 0.1)"
               : "rgba(0, 0, 0, 0.05)";

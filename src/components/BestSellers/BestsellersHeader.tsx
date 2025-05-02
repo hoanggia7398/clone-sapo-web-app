@@ -34,87 +34,85 @@ const BestsellersHeader = () => {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="flex flex-wrap gap-2">
-            {/* Time period selector */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-9 px-3 flex items-center gap-1.5 bg-white border-gray-200"
+        {/* Filters - updated to display in a wrapped row on mobile */}
+        <div className="flex flex-wrap gap-2">
+          {/* Time period selector */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-9 px-3 flex items-center gap-1.5 bg-white border-gray-200"
+              >
+                <Calendar className="h-4 w-4 text-gray-500" />
+                <span>{selectedPeriod.label}</span>
+                <ArrowDown className="h-3.5 w-3.5 ml-1 text-gray-400" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-40">
+              {timePeriodOptions.map((option) => (
+                <DropdownMenuItem
+                  key={option.value}
+                  onClick={() => setSelectedPeriod(option)}
+                  className="cursor-pointer"
                 >
-                  <Calendar className="h-4 w-4 text-gray-500" />
-                  <span>{selectedPeriod.label}</span>
-                  <ArrowDown className="h-3.5 w-3.5 ml-1 text-gray-400" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-40">
-                {timePeriodOptions.map((option) => (
-                  <DropdownMenuItem
-                    key={option.value}
-                    onClick={() => setSelectedPeriod(option)}
-                    className="cursor-pointer"
-                  >
-                    {option.label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  {option.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-            {/* Branch selector */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-9 px-3 flex items-center gap-1.5 bg-white border-gray-200"
+          {/* Branch selector */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-9 px-3 flex items-center gap-1.5 bg-white border-gray-200"
+              >
+                <Store className="h-4 w-4 text-gray-500" />
+                <span>{selectedBranch.label}</span>
+                <ArrowDown className="h-3.5 w-3.5 ml-1 text-gray-400" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              {branchOptions.map((option) => (
+                <DropdownMenuItem
+                  key={option.value}
+                  onClick={() => setSelectedBranch(option)}
+                  className="cursor-pointer"
                 >
-                  <Store className="h-4 w-4 text-gray-500" />
-                  <span>{selectedBranch.label}</span>
-                  <ArrowDown className="h-3.5 w-3.5 ml-1 text-gray-400" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {branchOptions.map((option) => (
-                  <DropdownMenuItem
-                    key={option.value}
-                    onClick={() => setSelectedBranch(option)}
-                    className="cursor-pointer"
-                  >
-                    {option.label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  {option.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-            {/* Category selector */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-9 px-3 flex items-center gap-1.5 bg-white border-gray-200"
+          {/* Category selector */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-9 px-3 flex items-center gap-1.5 bg-white border-gray-200"
+              >
+                <FolderTree className="h-4 w-4 text-gray-500" />
+                <span>{selectedCategory.label}</span>
+                <ArrowDown className="h-3.5 w-3.5 ml-1 text-gray-400" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-44">
+              {categoryOptions.map((option) => (
+                <DropdownMenuItem
+                  key={option.value}
+                  onClick={() => setSelectedCategory(option)}
+                  className="cursor-pointer"
                 >
-                  <FolderTree className="h-4 w-4 text-gray-500" />
-                  <span>{selectedCategory.label}</span>
-                  <ArrowDown className="h-3.5 w-3.5 ml-1 text-gray-400" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-44">
-                {categoryOptions.map((option) => (
-                  <DropdownMenuItem
-                    key={option.value}
-                    onClick={() => setSelectedCategory(option)}
-                    className="cursor-pointer"
-                  >
-                    {option.label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+                  {option.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {/* Export button */}
           <Button

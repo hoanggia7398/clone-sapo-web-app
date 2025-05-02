@@ -4,7 +4,7 @@ import { revenueByPaymentMethod } from "@/mockData/revenue";
 import { Pie } from "react-chartjs-2";
 import { chartColors } from "@/lib/chartUtils";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-import { ChartOptions } from "chart.js";
+import { ChartOptions, TooltipItem } from "chart.js";
 
 const RevenueByPaymentMethodChart = () => {
   // Colors for payment methods
@@ -41,7 +41,7 @@ const RevenueByPaymentMethodChart = () => {
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"pie">) {
             let label = context.label || "";
             if (label) {
               label += ": ";

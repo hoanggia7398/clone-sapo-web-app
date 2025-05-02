@@ -4,7 +4,7 @@ import { productChartData } from "@/mockData/bestsellers";
 import { chartColors, formatLargeNumber, withOpacity } from "@/lib/chartUtils";
 import { Bar } from "react-chartjs-2";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-import { ChartOptions } from "chart.js";
+import { ChartOptions, TooltipItem, ScriptableScaleContext } from "chart.js";
 
 const BestsellingProductsChart = () => {
   // Bar chart configuration
@@ -40,7 +40,7 @@ const BestsellingProductsChart = () => {
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"bar">) {
             let label = context.dataset.label || "";
             if (label) {
               label += ": ";
@@ -61,13 +61,18 @@ const BestsellingProductsChart = () => {
       x: {
         beginAtZero: true,
         ticks: {
-          callback: function (value: any) {
-            return formatLargeNumber(value) + " tr";
+          callback: function (tickValue: string | number) {
+            // Ensure tickValue is treated as a number for formatting
+            const numericValue = typeof tickValue === 'string' ? parseFloat(tickValue) : tickValue;
+            if (isNaN(numericValue)) {
+              return ''; // Handle cases where conversion might fail
+            }
+            return formatLargeNumber(numericValue) + " tr";
           },
         },
         grid: {
           display: true,
-          color: function (context) {
+          color: function (context: ScriptableScaleContext) {
             return context.tick && context.tick.major
               ? "rgba(0, 0, 0, 0.1)"
               : "rgba(0, 0, 0, 0.05)";

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Category, getCategoryById } from "@/mockData/categories";
+import { Category } from "@/mockData/categories";
 import {
   ChevronDown,
   ChevronRight,

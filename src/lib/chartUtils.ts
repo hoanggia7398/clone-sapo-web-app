@@ -31,7 +31,7 @@ export const withOpacity = (color: string, opacity: number) => {
 // Get a gradient for chart backgrounds
 export const getGradient = (
   ctx: CanvasRenderingContext2D,
-  chartArea: any,
+  chartArea: { bottom: number; top: number },
   color: string
 ) => {
   const gradient = ctx.createLinearGradient(

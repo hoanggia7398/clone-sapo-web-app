@@ -4,7 +4,7 @@ import { revenueByBranch } from "@/mockData/revenue";
 import { Bar } from "react-chartjs-2";
 import { chartColors, formatLargeNumber } from "@/lib/chartUtils";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { ChartOptions } from "chart.js";
+import { ChartOptions, TooltipItem, ScriptableScaleContext } from "chart.js";
 
 const RevenueByBranchChart = () => {
   // Generate colors for each branch
@@ -38,7 +38,7 @@ const RevenueByBranchChart = () => {
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"bar">) {
             let label = context.dataset.label || "";
             if (label) {
               label += ": ";
@@ -59,14 +59,15 @@ const RevenueByBranchChart = () => {
       x: {
         beginAtZero: true,
         ticks: {
-          callback: function (value: any) {
-            return formatLargeNumber(value);
+          callback: function (tickValue: string | number) {
+            // Ensure value is treated as a number before formatting
+            const numericValue = typeof tickValue === 'string' ? parseFloat(tickValue) : tickValue;
+            return formatLargeNumber(numericValue);
           },
         },
         grid: {
-          // Fix: replace drawBorder with display and color options that are properly typed
           display: true,
-          color: function (context) {
+          color: function (context: ScriptableScaleContext) {
             return context.tick && context.tick.major
               ? "rgba(0, 0, 0, 0.1)"
               : "rgba(0, 0, 0, 0.05)";
