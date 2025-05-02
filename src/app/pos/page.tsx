@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { products, initialCart, categories } from "../../mockData/pos";
-import { X, ShoppingBag } from "lucide-react";
+import { ChevronUp, ChevronDown, GripHorizontal } from "lucide-react"; // Import icons
 
 // Import các component đã tạo
 import POSHeader from "../../components/POS/POSHeader";
@@ -13,6 +13,7 @@ import CustomerSelection from "../../components/POS/CustomerSelection";
 import CartItems from "../../components/POS/CartItems";
 import PaymentMethod from "../../components/POS/PaymentMethod";
 import CartSummary from "../../components/POS/CartSummary";
+import { useIsMobile } from "../../hooks/use-mobile";
 
 // Định nghĩa interface
 interface Product {
@@ -33,23 +34,97 @@ export default function POS() {
   const [activeCategory, setActiveCategory] = useState("Tất cả");
   const [cart, setCart] = useState<CartItem[]>(initialCart);
   const [paymentMethod, setPaymentMethod] = useState("cash");
-  const [showCart, setShowCart] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+
+  // New state for cart height on mobile
+  const [cartHeight, setCartHeight] = useState(60); // Default 60vh
+  const [isDragging, setIsDragging] = useState(false);
+  const [startY, setStartY] = useState(0);
+  const isMobile = useIsMobile();
 
   const cartRef = useRef<HTMLDivElement>(null);
   const productRefs = useRef<{ [key: number]: HTMLDivElement }>({});
+  const dragHandleRef = useRef<HTMLDivElement>(null);
 
-  // Auto-hide cart in mobile view when cart is empty
-  useEffect(() => {
-    if (cart.length === 0 && window.innerWidth < 768) {
-      setShowCart(false);
+  // Handle drag start
+  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isMobile) return;
+
+    setIsDragging(true);
+    if ("touches" in e) {
+      setStartY(e.touches[0].clientY);
+    } else {
+      setStartY(e.clientY);
     }
-  }, [cart]);
+    document.body.style.userSelect = "none";
+  };
 
-  // Filter products by category
-  const filteredProducts =
-    activeCategory === "Tất cả"
-      ? products
-      : products.filter((product) => product.category === activeCategory);
+  // Handle drag move
+  const handleDragMove = (e: MouseEvent | TouchEvent) => {
+    if (!isDragging || !isMobile) return;
+
+    let currentY: number;
+    if ("touches" in e) {
+      currentY = e.touches[0].clientY;
+    } else {
+      currentY = e.clientY;
+    }
+
+    const deltaY = startY - currentY;
+    const windowHeight = window.innerHeight;
+    const newHeightPercent = cartHeight + (deltaY / windowHeight) * 100;
+
+    // Limit height between 30vh and 90vh
+    if (newHeightPercent >= 30 && newHeightPercent <= 90) {
+      setCartHeight(newHeightPercent);
+      setStartY(currentY);
+    }
+  };
+
+  // Handle drag end
+  const handleDragEnd = () => {
+    if (!isMobile) return;
+
+    setIsDragging(false);
+    document.body.style.userSelect = "";
+  };
+
+  // Set up event listeners for drag
+  useEffect(() => {
+    if (isMobile) {
+      window.addEventListener("mousemove", handleDragMove);
+      window.addEventListener("touchmove", handleDragMove);
+      window.addEventListener("mouseup", handleDragEnd);
+      window.addEventListener("touchend", handleDragEnd);
+
+      return () => {
+        window.removeEventListener("mousemove", handleDragMove);
+        window.removeEventListener("touchmove", handleDragMove);
+        window.removeEventListener("mouseup", handleDragEnd);
+        window.removeEventListener("touchend", handleDragEnd);
+      };
+    }
+  }, [isDragging, startY, cartHeight, isMobile]);
+
+  // Toggle between expanded and collapsed states
+  const toggleCartExpand = () => {
+    if (isMobile) {
+      setCartHeight(cartHeight < 75 ? 85 : 60); // Toggle between default and expanded
+    }
+  };
+
+  // Filter products by search query and category
+  const filteredProducts = products
+    .filter(
+      (product) =>
+        activeCategory === "Tất cả" || product.category === activeCategory
+    )
+    .filter(
+      (product) =>
+        searchQuery === "" ||
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.sku.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
   // Add product to cart - simplified without flying animation
   const addToCart = (product: Product) => {
@@ -65,11 +140,6 @@ export default function POS() {
       );
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
-    }
-
-    // Show cart when adding items (helpful on mobile)
-    if (window.innerWidth < 768) {
-      setShowCart(true);
     }
   };
 
@@ -96,97 +166,98 @@ export default function POS() {
     return "890,000đ"; // Hardcoded for demo
   };
 
-  // Function to toggle cart visibility on mobile
-  const toggleCart = () => {
-    setShowCart(!showCart);
+  // Handle search query changes
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setShowSearchResults(query.length > 0);
   };
 
   // Count total items in cart
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="flex-1 flex flex-col md:flex-row h-full overflow-hidden relative">
-      {/* Mobile cart toggle button */}
-      <div className="md:hidden fixed bottom-4 right-4 z-10">
-        <button
-          onClick={toggleCart}
-          className="bg-blue-600 text-white rounded-full p-3 shadow-lg flex items-center justify-center"
+    <div className="flex-1 flex flex-col overflow-hidden relative h-[calc(100vh-3.5rem)] md:h-full">
+      {/* Products and Cart Layout */}
+      <div className="flex flex-col md:flex-row h-full">
+        {/* Products Section - Always visible but with dynamic height on mobile */}
+        <div className="w-full md:w-2/3 p-4 md:p-6 overflow-y-auto h-[40vh] md:h-full">
+          <POSHeader />
+
+          {/* Search & Filter Row */}
+          <div className="bg-white rounded-xl shadow-sm p-3 md:p-4 mb-4 md:mb-6">
+            <ProductSearch
+              searchQuery={searchQuery}
+              setSearchQuery={handleSearchChange}
+            />
+            <CategoryFilter
+              categories={categories}
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+            />
+          </div>
+
+          {/* Products Grid */}
+          <ProductGrid
+            products={filteredProducts}
+            addToCart={addToCart}
+            productRefs={productRefs}
+            showSearchResults={showSearchResults}
+            searchQuery={searchQuery}
+          />
+        </div>
+
+        {/* Cart Section - Always visible */}
+        <div
+          className="w-full md:w-1/3 bg-white border-t md:border-t-0 md:border-l border-gray-300 flex flex-col"
+          style={{ height: isMobile ? `${cartHeight}vh` : "100%" }}
         >
-          {showCart ? (
-            <X size={24} />
-          ) : (
-            <div className="relative">
-              <ShoppingBag size={24} />
-              {cartItemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItemCount}
-                </span>
-              )}
+          {/* Drag Handle - Only visible on mobile */}
+          {isMobile && (
+            <div
+              ref={dragHandleRef}
+              className="cursor-grab active:cursor-grabbing bg-gray-100 flex items-center justify-center py-1 border-b border-gray-200"
+              onMouseDown={handleDragStart}
+              onTouchStart={handleDragStart}
+            >
+              <div className="flex flex-col items-center">
+                <GripHorizontal size={20} className="text-gray-400" />
+              </div>
+              <button
+                onClick={toggleCartExpand}
+                className="absolute right-3 p-1"
+              >
+                {cartHeight < 75 ? (
+                  <ChevronUp size={18} className="text-gray-500" />
+                ) : (
+                  <ChevronDown size={18} className="text-gray-500" />
+                )}
+              </button>
             </div>
           )}
-        </button>
-      </div>
 
-      {/* Products Section */}
-      <div
-        className={`w-full md:w-2/3 p-4 md:p-6 overflow-y-auto h-full ${
-          showCart ? "hidden" : "block"
-        } md:block`}
-      >
-        <POSHeader />
+          <CustomerSelection />
 
-        {/* Search & Filter Row */}
-        <div className="bg-white rounded-xl shadow-sm p-3 md:p-4 mb-4 md:mb-6">
-          <ProductSearch
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
+          {/* Cart Items */}
+          <CartItems
+            cart={cart}
+            updateQuantity={updateQuantity}
+            removeFromCart={removeFromCart}
+            cartRef={cartRef}
           />
-          <CategoryFilter
-            categories={categories}
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          />
-        </div>
 
-        {/* Products Grid */}
-        <ProductGrid
-          products={filteredProducts}
-          addToCart={addToCart}
-          productRefs={productRefs}
-        />
-      </div>
-
-      {/* Cart Section */}
-      <div
-        className={`w-full md:w-1/3 bg-white border-l border-gray-300 flex flex-col h-full ${
-          showCart ? "block" : "hidden"
-        } md:block`}
-      >
-        <div className="md:hidden flex justify-between items-center p-4 border-b">
-          <h2 className="font-bold text-lg">Giỏ hàng</h2>
-          <button onClick={toggleCart} className="text-gray-500">
-            <X size={24} />
-          </button>
-        </div>
-
-        <CustomerSelection />
-
-        {/* Cart Items */}
-        <CartItems
-          cart={cart}
-          updateQuantity={updateQuantity}
-          removeFromCart={removeFromCart}
-          cartRef={cartRef}
-        />
-
-        {/* Cart Summary */}
-        <div className="border-t border-gray-300 p-4 bg-gray-50">
-          {/* Payment Method */}
-          <PaymentMethod
-            paymentMethod={paymentMethod}
-            setPaymentMethod={setPaymentMethod}
-          />
-          <CartSummary calculateTotal={calculateTotal} />
+          {/* Cart Summary - Reduced padding on mobile */}
+          <div
+            className={`border-t border-gray-300 ${
+              isMobile ? "p-2" : "p-4"
+            } bg-gray-50`}
+          >
+            {/* Payment Method */}
+            <PaymentMethod
+              paymentMethod={paymentMethod}
+              setPaymentMethod={setPaymentMethod}
+            />
+            <CartSummary calculateTotal={calculateTotal} />
+          </div>
         </div>
       </div>
     </div>
