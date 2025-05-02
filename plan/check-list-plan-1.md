@@ -29,19 +29,22 @@
 - [x] Tạo liên kết giữa sản phẩm và danh mục
 
 ### 1.3 Trang doanh thu (/revenue)
-- [ ] Tạo file trang cơ bản (`src/app/revenue/page.tsx`)
-- [ ] Thiết kế và triển khai biểu đồ doanh thu
-  - [ ] Tạo component biểu đồ doanh thu (`src/components/Revenue/RevenueChart.tsx`)
-  - [ ] Tạo mockData cho doanh thu (`src/mockData/revenue.ts`)
-- [ ] Thêm bộ lọc theo thời gian
-- [ ] Thêm thống kê doanh thu theo kênh bán hàng
+- [x] Tạo file trang cơ bản (`src/app/revenue/page.tsx`)
+- [x] Thiết kế và triển khai biểu đồ doanh thu
+  - [x] Tạo component biểu đồ doanh thu (`src/components/Revenue/RevenueChart.tsx`)
+  - [x] Tạo mockData cho doanh thu (`src/mockData/revenue.ts`)
+- [x] Thêm bộ lọc theo thời gian
+- [x] Thêm thống kê doanh thu theo kênh bán hàng
 
 ### 1.4 Trang sản phẩm bán chạy (/bestsellers)
-- [ ] Tạo file trang cơ bản (`src/app/bestsellers/page.tsx`)
-- [ ] Thiết kế và triển khai UI danh sách sản phẩm bán chạy
-  - [ ] Tạo component hiển thị sản phẩm bán chạy (`src/components/BestSellers/BestSellersList.tsx`)
-- [ ] Thêm bộ lọc theo thời gian, danh mục, chi nhánh
-- [ ] Tạo biểu đồ trực quan hóa doanh số
+- [x] Tạo file trang cơ bản (`src/app/bestsellers/page.tsx`)
+- [x] Thiết kế và triển khai UI danh sách sản phẩm bán chạy
+  - [x] Tạo component hiển thị sản phẩm bán chạy (`src/components/BestSellers/BestsellingProductsTable.tsx`)
+  - [x] Tạo mockData cho sản phẩm bán chạy (`src/mockData/bestsellers.ts`)
+- [x] Thêm bộ lọc theo thời gian, danh mục, chi nhánh (`src/components/BestSellers/BestsellersHeader.tsx`)
+- [x] Tạo biểu đồ trực quan hóa doanh số
+  - [x] Biểu đồ sản phẩm bán chạy (`src/components/BestSellers/BestsellingProductsChart.tsx`)
+  - [x] Biểu đồ danh mục bán chạy (`src/components/BestSellers/BestsellingCategoryChart.tsx`)
 
 ### 1.5 Trang chi nhánh (/stores)
 - [ ] Tạo file trang cơ bản (`src/app/stores/page.tsx`)

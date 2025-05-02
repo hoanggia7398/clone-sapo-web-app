@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
       "media.dyson.com",
       "assets.nintendo.com",
       "assets.adidas.com",
+      "placehold.co",
     ],
   },
 };
