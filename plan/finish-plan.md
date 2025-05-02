@@ -6,7 +6,7 @@ This document tracks the progress of implementing all the development plans for 
 
 | Plan # | Title | Status | Completion Date | Notes |
 |--------|-------|--------|----------------|-------|
-| 1      | Tổng quan và UI/UX | In Progress | - | 4/12 required pages completed |
+| 1      | Tổng quan và UI/UX | In Progress | - | 5/12 required pages completed |
 | 2      | Chức năng quản lý sản phẩm | Not Started | - | - |
 | 3      | Quản lý đơn hàng và khách hàng | Not Started | - | - |
 | 4      | Tích hợp POS và thanh toán | Not Started | - | - |
@@ -20,9 +20,9 @@ This document tracks the progress of implementing all the development plans for 
 - ✅ 1.2 Trang danh mục (/categories)
 - ✅ 1.3 Trang doanh thu (/revenue)
 - ✅ 1.4 Trang sản phẩm bán chạy (/bestsellers)
+- ✅ 1.5 Trang chi nhánh (/stores)
 
 ### Pending Items
-- 1.5 Trang chi nhánh (/stores)
 - 1.6 Trang nhân viên (/staff)
 - 1.7 Trang cài đặt (/settings)
 - 2.1 Thêm pagination cho danh sách đơn hàng và khách hàng
@@ -32,7 +32,7 @@ This document tracks the progress of implementing all the development plans for 
 - 3.2 Cải thiện mobile menu
 
 ### Next Priority
-1. Trang chi nhánh (/stores)
+1. Trang nhân viên (/staff)
 2. Thêm pagination cho danh sách đơn hàng và khách hàng
 
 ## Implementation Notes
@@ -42,7 +42,7 @@ This document tracks the progress of implementing all the development plans for 
 - Added filtering options for time period, branch, and category
 - Created visualizations for top products and category distribution
 - Implemented sortable and paginated product table
-
-## Future Plans
-- Continue implementing remaining sections of Plan 1
-- Begin work on Plan 2 once Plan 1 is fully completed
+- Completed implementation of chi nhánh (/stores) page with full CRUD functionality
+- Created detailed store information view with contact details and opening hours
+- Implemented search functionality for stores by name, code, and city
+- Added active/inactive status indicators and headquarters designation

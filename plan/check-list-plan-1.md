@@ -47,14 +47,14 @@
   - [x] Biểu đồ danh mục bán chạy (`src/components/BestSellers/BestsellingCategoryChart.tsx`)
 
 ### 1.5 Trang chi nhánh (/stores)
-- [ ] Tạo file trang cơ bản (`src/app/stores/page.tsx`)
-- [ ] Thiết kế và triển khai UI danh sách chi nhánh
-  - [ ] Tạo component hiển thị chi nhánh (`src/components/Stores/StoresList.tsx`)
-  - [ ] Tạo mockData cho chi nhánh (`src/mockData/stores.ts`)
-- [ ] Thêm chức năng xem chi tiết chi nhánh
-- [ ] Thêm chức năng thêm chi nhánh
-- [ ] Thêm chức năng sửa chi nhánh
-- [ ] Thêm chức năng xóa chi nhánh
+- [x] Tạo file trang cơ bản (`src/app/stores/page.tsx`)
+- [x] Thiết kế và triển khai UI danh sách chi nhánh
+  - [x] Tạo component hiển thị chi nhánh (`src/components/Stores/StoresList.tsx`)
+  - [x] Tạo mockData cho chi nhánh (`src/mockData/stores.ts`)
+- [x] Thêm chức năng xem chi tiết chi nhánh
+- [x] Thêm chức năng thêm chi nhánh
+- [x] Thêm chức năng sửa chi nhánh
+- [x] Thêm chức năng xóa chi nhánh
 
 ### 1.6 Trang nhân viên (/staff)
 - [ ] Tạo file trang cơ bản (`src/app/staff/page.tsx`)
