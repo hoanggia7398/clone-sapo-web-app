@@ -8,6 +8,7 @@ import {
   FileText,
   Home,
   Layers,
+  LucideIcon,
   Package,
   Settings,
   ShoppingBag,
@@ -33,6 +34,18 @@ interface AppSidebarProps {
   hideHeader?: boolean;
 }
 
+interface MenuItem {
+  href: string;
+  label: string;
+  tooltip: string;
+  icon: LucideIcon;
+}
+
+interface MenuSection {
+  title: string;
+  items: MenuItem[];
+}
+
 export default function AppSidebar({
   onItemClick,
   hideHeader,
@@ -42,6 +55,101 @@ export default function AppSidebar({
   const isActivePath = (path: string) => {
     return pathname === path;
   };
+
+  // Define all menu sections
+  const menuSections: MenuSection[] = [
+    {
+      title: "", // Dashboard has no section title
+      items: [
+        {
+          href: "/",
+          label: "Dashboard",
+          tooltip: "Dashboard",
+          icon: Home,
+        },
+      ],
+    },
+    {
+      title: "BÁN HÀNG",
+      items: [
+        {
+          href: "/pos",
+          label: "POS Bán hàng",
+          tooltip: "POS Bán hàng",
+          icon: ShoppingBag,
+        },
+        {
+          href: "/orders",
+          label: "Đơn hàng",
+          tooltip: "Đơn hàng",
+          icon: FileText,
+        },
+        {
+          href: "/customers",
+          label: "Khách hàng",
+          tooltip: "Khách hàng",
+          icon: Users,
+        },
+      ],
+    },
+    {
+      title: "SẢN PHẨM",
+      items: [
+        {
+          href: "/products",
+          label: "Sản phẩm",
+          tooltip: "Sản phẩm",
+          icon: Package,
+        },
+        {
+          href: "/categories",
+          label: "Danh mục",
+          tooltip: "Danh mục",
+          icon: Layers,
+        },
+      ],
+    },
+    {
+      title: "BÁO CÁO",
+      items: [
+        {
+          href: "/revenue",
+          label: "Doanh thu",
+          tooltip: "Doanh thu",
+          icon: DollarSign,
+        },
+        {
+          href: "/bestsellers",
+          label: "Sản phẩm bán chạy",
+          tooltip: "Sản phẩm bán chạy",
+          icon: BarChart3,
+        },
+      ],
+    },
+    {
+      title: "HỆ THỐNG",
+      items: [
+        {
+          href: "/stores",
+          label: "Chi nhánh",
+          tooltip: "Chi nhánh",
+          icon: Store,
+        },
+        {
+          href: "/staff",
+          label: "Nhân viên",
+          tooltip: "Nhân viên",
+          icon: Users,
+        },
+        {
+          href: "/settings",
+          label: "Cài đặt",
+          tooltip: "Cài đặt",
+          icon: Settings,
+        },
+      ],
+    },
+  ];
 
   const sidebarContent = (
     <>
@@ -59,164 +167,37 @@ export default function AppSidebar({
         </SidebarHeader>
       )}
       <SidebarContent>
-        {/* Dashboard Section */}
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <Link href="/" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/")}
-                tooltip="Dashboard"
-              >
-                <Home className="size-4 shrink-0" />
-                <span>Dashboard</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-        </SidebarMenu>
-
-        {/* Sales Section */}
-        <div className="px-4 py-1 text-xs text-gray-500 md:group-data-[collapsible=icon]:hidden">
-          BÁN HÀNG
-        </div>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <Link href="/pos" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/pos")}
-                tooltip="POS Bán hàng"
-              >
-                <ShoppingBag className="size-4 shrink-0" />
-                <span>POS Bán hàng</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <Link href="/orders" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/orders")}
-                tooltip="Đơn hàng"
-              >
-                <FileText className="size-4 shrink-0" />
-                <span>Đơn hàng</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <Link href="/customers" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/customers")}
-                tooltip="Khách hàng"
-              >
-                <Users className="size-4 shrink-0" />
-                <span>Khách hàng</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-        </SidebarMenu>
-
-        {/* Products Section */}
-        <div className="px-4 py-1 text-xs text-gray-500 md:group-data-[collapsible=icon]:hidden">
-          SẢN PHẨM
-        </div>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <Link href="/products" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/products")}
-                tooltip="Sản phẩm"
-              >
-                <Package className="size-4 shrink-0" />
-                <span>Sản phẩm</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <Link href="/categories" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/categories")}
-                tooltip="Danh mục"
-              >
-                <Layers className="size-4 shrink-0" />
-                <span>Danh mục</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-        </SidebarMenu>
-
-        {/* Reports Section */}
-        <div className="px-4 py-1 text-xs text-gray-500 md:group-data-[collapsible=icon]:hidden">
-          BÁO CÁO
-        </div>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <Link href="/revenue" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/revenue")}
-                tooltip="Doanh thu"
-              >
-                <DollarSign className="size-4 shrink-0" />
-                <span>Doanh thu</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <Link href="/bestsellers" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/bestsellers")}
-                tooltip="Sản phẩm bán chạy"
-              >
-                <BarChart3 className="size-4 shrink-0" />
-                <span>Sản phẩm bán chạy</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-        </SidebarMenu>
-
-        {/* System Section */}
-        <div className="px-4 py-1 text-xs text-gray-500 md:group-data-[collapsible=icon]:hidden">
-          HỆ THỐNG
-        </div>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <Link href="/stores" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/stores")}
-                tooltip="Chi nhánh"
-              >
-                <Store className="size-4 shrink-0" />
-                <span>Chi nhánh</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <Link href="/staff" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/staff")}
-                tooltip="Nhân viên"
-              >
-                <Users className="size-4 shrink-0" />
-                <span>Nhân viên</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <Link href="/settings" onClick={() => onItemClick?.()}>
-              <SidebarMenuButton
-                isActive={isActivePath("/settings")}
-                tooltip="Cài đặt"
-              >
-                <Settings className="size-4 shrink-0" />
-                <span>Cài đặt</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        {menuSections.map((section, sectionIndex) => (
+          <div key={sectionIndex}>
+            {section.title && (
+              <div className="px-4 py-1 text-xs text-gray-500 md:group-data-[collapsible=icon]:hidden">
+                {section.title}
+              </div>
+            )}
+            <SidebarMenu>
+              {section.items.map((item, itemIndex) => {
+                const Icon = item.icon;
+                return (
+                  <SidebarMenuItem key={itemIndex}>
+                    <Link
+                      className="flex justify-center"
+                      href={item.href}
+                      onClick={() => onItemClick?.()}
+                    >
+                      <SidebarMenuButton
+                        isActive={isActivePath(item.href)}
+                        tooltip={item.tooltip}
+                      >
+                        <Icon className="size-4 shrink-0" />
+                        <span>{item.label}</span>
+                      </SidebarMenuButton>
+                    </Link>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </div>
+        ))}
       </SidebarContent>
 
       <SidebarFooter className="bg-gray-50 dark:bg-gray-800/50">

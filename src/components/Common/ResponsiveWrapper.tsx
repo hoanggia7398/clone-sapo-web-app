@@ -67,7 +67,7 @@ export default function ResponsiveWrapper({
 
         {/* Add a header spacing for mobile view */}
         <div className="h-14 md:h-0 relative"></div>
-        <div className="flex-1">{children}</div>
+        <div className="p-3 flex-1 bg-slate-50">{children}</div>
       </main>
     </div>
   );
