@@ -70,7 +70,6 @@
 - [ ] Thiết kế và triển khai UI cài đặt
   - [ ] Tạo các tab cài đặt khác nhau
 - [ ] Thêm cài đặt thông tin cửa hàng
-- [ ] Thêm cài đặt thuế, phí vận chuyển
 - [ ] Thêm cài đặt tài khoản người dùng
 - [ ] Thêm cài đặt in hóa đơn
 

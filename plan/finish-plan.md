@@ -6,7 +6,7 @@ This document tracks the progress of implementing all the development plans for 
 
 | Plan # | Title | Status | Completion Date | Notes |
 |--------|-------|--------|----------------|-------|
-| 1      | Tổng quan và UI/UX | In Progress | - | 5/12 required pages completed |
+| 1      | Tổng quan và UI/UX | In Progress | - | 6/12 required pages completed |
 | 2      | Chức năng quản lý sản phẩm | Not Started | - | - |
 | 3      | Quản lý đơn hàng và khách hàng | Not Started | - | - |
 | 4      | Tích hợp POS và thanh toán | Not Started | - | - |
@@ -21,9 +21,9 @@ This document tracks the progress of implementing all the development plans for 
 - ✅ 1.3 Trang doanh thu (/revenue)
 - ✅ 1.4 Trang sản phẩm bán chạy (/bestsellers)
 - ✅ 1.5 Trang chi nhánh (/stores)
+- ✅ 1.6 Trang nhân viên (/staff)
 
 ### Pending Items
-- 1.6 Trang nhân viên (/staff)
 - 1.7 Trang cài đặt (/settings)
 - 2.1 Thêm pagination cho danh sách đơn hàng và khách hàng
 - 2.2 Cải thiện UX cho màn hình POS
@@ -32,8 +32,9 @@ This document tracks the progress of implementing all the development plans for 
 - 3.2 Cải thiện mobile menu
 
 ### Next Priority
-1. Trang nhân viên (/staff)
-2. Thêm pagination cho danh sách đơn hàng và khách hàng
+1. Thêm pagination cho danh sách đơn hàng và khách hàng
+2. Trang cài đặt (/settings)
+3. Cải thiện UX cho màn hình POS
 
 ## Implementation Notes
 
